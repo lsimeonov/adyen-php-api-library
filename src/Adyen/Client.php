@@ -12,8 +12,10 @@ class Client
     const USER_AGENT_SUFFIX = "adyen-php-api-library/";
     const ENDPOINT_TEST = "https://pal-test.adyen.com";
     const ENDPOINT_LIVE = "https://pal-live.adyen.com";
-    const ENPOINT_TEST_DIRECTORY_LOOKUP = "https://test.adyen.com/hpp/directory/v2.shtml";
-    const ENPOINT_LIVE_DIRECTORY_LOOKUP = "https://live.adyen.com/hpp/directory/v2.shtml";
+    const MARKETPLACE_ENDPOINT_TEST = "https://cal-test.adyen.com";
+    const MARKETPLACE_ENDPOINT_LIVE = "https://cal-live.adyen.com";
+    const ENDPOINT_TEST_DIRECTORY_LOOKUP = "https://test.adyen.com/hpp/directory/v2.shtml";
+    const ENDPOINT_LIVE_DIRECTORY_LOOKUP = "https://live.adyen.com/hpp/directory/v2.shtml";
     const API_VERSION = "v30";
     const API_RECURRING_VERSION = "v25";
     const API_MARKETPLACE_VERSION = "v3";
@@ -86,11 +88,13 @@ class Client
         if ($environment == \Adyen\Environment::TEST) {
             $this->_config->set('environment', \Adyen\Environment::TEST);
             $this->_config->set('endpoint', self::ENDPOINT_TEST);
-            $this->_config->set('endpointDirectorylookup', self::ENPOINT_TEST_DIRECTORY_LOOKUP);
+            $this->_config->set('marketplaceEndpoint', self::MARKETPLACE_ENDPOINT_TEST);
+            $this->_config->set('endpointDirectorylookup', self::ENDPOINT_TEST_DIRECTORY_LOOKUP);
         } elseif ($environment == \Adyen\Environment::LIVE) {
             $this->_config->set('environment', \Adyen\Environment::LIVE);
             $this->_config->set('endpoint', self::ENDPOINT_LIVE);
-            $this->_config->set('endpointDirectorylookup', self::ENPOINT_LIVE_DIRECTORY_LOOKUP);
+            $this->_config->set('marketplaceEndpoint', self::MARKETPLACE_ENDPOINT_LIVE);
+            $this->_config->set('endpointDirectorylookup', self::ENDPOINT_LIVE_DIRECTORY_LOOKUP);
         } else {
             // environment does not exists
             $msg = "This environment does not exists use " . \Adyen\Environment::TEST . ' or ' . \Adyen\Environment::LIVE;

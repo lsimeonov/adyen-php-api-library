@@ -18,9 +18,8 @@ class CreateAccountHolder extends \Adyen\Service\AbstractResource
         $this->_service = $service;
         $this->_endpoint = $service->getClient()
                                    ->getConfig()
-                                   ->get('endpoint') . '/cal/services/Account/' . $service->getClient()
-                                                                                          ->getApiMarketplaceVersion() . '/createAccountHolder';
-
+                                   ->get('marketplaceEndpoint') . '/cal/services/Account/' . $service->getClient()
+                                                                                                     ->getApiMarketplaceVersion() . '/createAccountHolder';
     }
 
 }
