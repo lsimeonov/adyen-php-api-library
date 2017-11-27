@@ -222,6 +222,9 @@ class CurlClient implements ClientInterface
         $decodeResult = json_decode($result, true);
 
         if(isset($decodeResult['message']) && isset($decodeResult['errorCode'])) {
+            if(!is_numeric($decodeResult) && strstr($decodeResult['errorCode'], '_') !== false){
+                $decodeResult['errorCode'] = str_replace('_', '', $decodeResult['errorCode']);
+            }
             $logger->error($decodeResult['errorCode'] . ': ' . $decodeResult['message']);
             throw new \Adyen\AdyenException($decodeResult['message'], $decodeResult['errorCode'], null, $decodeResult['status'], $decodeResult['errorType']);
         }

@@ -4,8 +4,6 @@
 namespace Adyen\Service;
 
 
-use Adyen\Service\ResourceModel\Marketplace\CreateAccountHolder;
-
 /**
  * Class Marketplace.
  */
@@ -18,6 +16,21 @@ class Marketplace extends \Adyen\Service
     protected $_createAccountHolder;
 
     /**
+     * @var \Adyen\Service\ResourceModel\Markerplace\GetAccountHolder
+     */
+    protected $_getAccountHolder;
+
+    /**
+     * @var \Adyen\Service\ResourceModel\Markerplace\CloseAccount
+     */
+    protected $_closeAccount;
+
+    /**
+     * @var \Adyen\Service\ResourceModel\Markerplace\UploadDocument
+     */
+    protected $_uploadDocument;
+
+    /**
      * Marketplace constructor.
      *
      * @param \Adyen\Client $client
@@ -28,7 +41,10 @@ class Marketplace extends \Adyen\Service
     {
         parent::__construct($client);
 
-        $this->_createAccountHolder = new CreateAccountHolder($this);
+        $this->_createAccountHolder = new \Adyen\Service\ResourceModel\Marketplace\CreateAccountHolder($this);
+        $this->_getAccountHolder = new \Adyen\Service\ResourceModel\Markerplace\GetAccountHolder($this);
+        $this->_closeAccount = new \Adyen\Service\ResourceModel\Markerplace\CloseAccount($this);
+        $this->_uploadDocument = new \Adyen\Service\ResourceModel\Markerplace\UploadDocument($this);
     }
 
     /**
@@ -41,4 +57,35 @@ class Marketplace extends \Adyen\Service
     {
         return $this->_createAccountHolder->request($params);
     }
+
+    /**
+     * @param $params
+     *
+     * @return mixed
+     */
+    public function getAccountHolder($params)
+    {
+        return $this->_getAccountHolder->request($params);
+    }
+
+    /**
+     * @param $params
+     *
+     * @return mixed
+     */
+    public function closeAccount($params)
+    {
+        return $this->_closeAccount->request($params);
+    }
+
+    /**
+     * @param $params
+     *
+     * @return mixed
+     */
+    public function uploadDocument($params)
+    {
+        return $this->_uploadDocument->request($params);
+    }
+
 }

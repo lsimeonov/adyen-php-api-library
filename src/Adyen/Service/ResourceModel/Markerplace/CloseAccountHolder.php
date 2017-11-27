@@ -1,26 +1,28 @@
 <?php
 
-namespace Adyen\Service\ResourceModel\Marketplace;
 
-class CreateAccountHolder extends \Adyen\Service\AbstractResource
+namespace Adyen\Service\ResourceModel\Markerplace;
+
+
+class CloseAccountHolder extends \Adyen\Service\AbstractResource
 {
 
-    /**
-     * @var array
-     */
     protected $_requiredFields = [
         'accountHolderCode',
-        'accountHolderDetails.email',
-        'legalEntity',
     ];
 
+    /**
+     * CloseAccount constructor.
+     *
+     * @param \Adyen\Service $service
+     */
     public function __construct(\Adyen\Service $service)
     {
         $this->_service = $service;
         $this->_endpoint = $service->getClient()
                                    ->getConfig()
                                    ->get('marketplaceEndpoint') . '/cal/services/Account/' . $service->getClient()
-                                                                                                     ->getApiMarketplaceVersion() . '/createAccountHolder';
+                                                                                                     ->getApiMarketplaceVersion() . '/closeAccountHolder';
     }
 
 }
