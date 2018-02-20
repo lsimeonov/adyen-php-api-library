@@ -24,6 +24,11 @@ class Marketplace extends \Adyen\Service
      * @var \Adyen\Service\ResourceModel\Markerplace\CloseAccount
      */
     protected $_closeAccount;
+    
+    /**
+     * @var \Adyen\Service\ResourceModel\Markerplace\CloseAccountHolder
+     */
+    protected $_closeAccountHolder;
 
     /**
      * @var \Adyen\Service\ResourceModel\Markerplace\UploadDocument
@@ -44,6 +49,7 @@ class Marketplace extends \Adyen\Service
         $this->_createAccountHolder = new \Adyen\Service\ResourceModel\Marketplace\CreateAccountHolder($this);
         $this->_getAccountHolder = new \Adyen\Service\ResourceModel\Markerplace\GetAccountHolder($this);
         $this->_closeAccount = new \Adyen\Service\ResourceModel\Markerplace\CloseAccount($this);
+        $this->_closeAccountHolder = new \Adyen\Service\ResourceModel\Markerplace\CloseAccountHolder($this);
         $this->_uploadDocument = new \Adyen\Service\ResourceModel\Markerplace\UploadDocument($this);
     }
 
@@ -76,6 +82,16 @@ class Marketplace extends \Adyen\Service
     public function closeAccount($params)
     {
         return $this->_closeAccount->request($params);
+    }
+    
+    /**
+     * @param $params
+     *
+     * @return mixed
+     */
+    public function closeAccountHolder($params)
+    {
+        return $this->_closeAccountHolder->request($params);
     }
 
     /**
