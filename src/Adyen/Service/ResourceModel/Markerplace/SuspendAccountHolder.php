@@ -1,4 +1,3 @@
-
 <?php
 
 namespace Adyen\Service\ResourceModel\Markerplace;
