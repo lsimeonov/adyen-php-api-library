@@ -11,7 +11,6 @@ class UpdateAccountHolder extends \Adyen\Service\AbstractResource
     protected $_requiredFields = [
         'accountHolderCode',
         'accountHolderDetails.email',
-        'legalEntity',
     ];
 
     public function __construct(\Adyen\Service $service)
