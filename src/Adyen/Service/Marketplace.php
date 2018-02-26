@@ -29,6 +29,10 @@ class Marketplace extends \Adyen\Service
      * @var \Adyen\Service\ResourceModel\Markerplace\UploadDocument
      */
     protected $_uploadDocument;
+    /**
+     * @var \Adyen\Service\ResourceModel\Marketplace\UpdateAccountHolder
+     */
+    protected $_updateAccountHolder;
 
     /**
      * Marketplace constructor.
@@ -42,6 +46,7 @@ class Marketplace extends \Adyen\Service
         parent::__construct($client);
 
         $this->_createAccountHolder = new \Adyen\Service\ResourceModel\Marketplace\CreateAccountHolder($this);
+        $this->_updateAccountHolder = new \Adyen\Service\ResourceModel\Marketplace\UpdateAccountHolder($this);
         $this->_getAccountHolder = new \Adyen\Service\ResourceModel\Markerplace\GetAccountHolder($this);
         $this->_closeAccount = new \Adyen\Service\ResourceModel\Markerplace\CloseAccount($this);
         $this->_uploadDocument = new \Adyen\Service\ResourceModel\Markerplace\UploadDocument($this);
@@ -56,6 +61,17 @@ class Marketplace extends \Adyen\Service
     public function createAccountHolder($params)
     {
         return $this->_createAccountHolder->request($params);
+    }
+
+    /**
+     * @param $params
+     *
+     * @return mixed
+     * @throws \Adyen\AdyenException
+     */
+    public function updateAccountHolder($params)
+    {
+        return $this->_updateAccountHolder->request($params);
     }
 
     /**
