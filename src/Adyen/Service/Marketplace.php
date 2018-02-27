@@ -22,12 +22,12 @@ class Marketplace extends \Adyen\Service
      * @var \Adyen\Service\ResourceModel\Markerplace\CloseAccount
      */
     protected $_closeAccount;
-    
+
     /**
      * @var \Adyen\Service\ResourceModel\Markerplace\CloseAccountHolder
      */
     protected $_closeAccountHolder;
-    
+
     /**
      * @var \Adyen\Service\ResourceModel\Markerplace\SuspendAccountHolder
      */
@@ -37,10 +37,16 @@ class Marketplace extends \Adyen\Service
      * @var \Adyen\Service\ResourceModel\Markerplace\UploadDocument
      */
     protected $_uploadDocument;
+
     /**
      * @var \Adyen\Service\ResourceModel\Marketplace\UpdateAccountHolder
      */
     protected $_updateAccountHolder;
+
+    /**
+     * @var \Adyen\Service\ResourceModel\Markerplace\DeleteBankAccounts
+     */
+    protected $_deleteBankAccounts;
 
     /**
      * Marketplace constructor.
@@ -60,6 +66,8 @@ class Marketplace extends \Adyen\Service
         $this->_closeAccountHolder = new \Adyen\Service\ResourceModel\Markerplace\CloseAccountHolder($this);
         $this->_suspendAccountHolder = new \Adyen\Service\ResourceModel\Markerplace\SuspendAccountHolder($this);
         $this->_uploadDocument = new \Adyen\Service\ResourceModel\Markerplace\UploadDocument($this);
+        $this->_deleteBankAccounts = new \Adyen\Service\ResourceModel\Markerplace\DeleteBankAccounts($this);
+
     }
 
     /**
@@ -99,11 +107,21 @@ class Marketplace extends \Adyen\Service
      *
      * @return mixed
      */
+    public function deleteBankAccounts($params)
+    {
+        return $this->_deleteBankAccounts->request($params);
+    }
+
+    /**
+     * @param $params
+     *
+     * @return mixed
+     */
     public function closeAccount($params)
     {
         return $this->_closeAccount->request($params);
     }
-    
+
     /**
      * @param $params
      *
@@ -113,7 +131,7 @@ class Marketplace extends \Adyen\Service
     {
         return $this->_closeAccountHolder->request($params);
     }
-    
+
     /**
      * @param $params
      *
