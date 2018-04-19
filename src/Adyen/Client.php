@@ -18,7 +18,7 @@ class Client
     const ENDPOINT_LIVE_DIRECTORY_LOOKUP = "https://live.adyen.com/hpp/directory/v2.shtml";
     const API_VERSION = "v30";
     const API_RECURRING_VERSION = "v25";
-    const API_MARKETPLACE_VERSION = "v3";
+    const API_MARKETPLACE_VERSION = "v4";
 
     /**
      * @var Adyen_Config $config
