@@ -19,6 +19,7 @@ class Client
     const API_VERSION = "v30";
     const API_RECURRING_VERSION = "v25";
     const API_MARKETPLACE_VERSION = "v4";
+    const API_NOTIFICATION_VERSION = "v1";
 
     /**
      * @var Adyen_Config $config
@@ -181,6 +182,15 @@ class Client
     public function getApiMarketplaceVersion()
     {
         return self::API_MARKETPLACE_VERSION;
+    }
+
+    /**
+     * Get the version of notification api
+     * @see https://docs.adyen.com/developers/marketpay/marketpay-api/notification
+     * @return string
+     */
+    public function getApiNotificationVersion(){
+        return self::API_NOTIFICATION_VERSION;
     }
 
     /**

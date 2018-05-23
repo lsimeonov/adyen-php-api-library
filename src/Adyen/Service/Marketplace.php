@@ -14,32 +14,32 @@ class Marketplace extends \Adyen\Service
     protected $_createAccountHolder;
 
     /**
-     * @var \Adyen\Service\ResourceModel\Markerplace\GetAccountHolder
+     * @var \Adyen\Service\ResourceModel\Marketplace\GetAccountHolder
      */
     protected $_getAccountHolder;
 
     /**
-     * @var \Adyen\Service\ResourceModel\Markerplace\CloseAccount
+     * @var \Adyen\Service\ResourceModel\Marketplace\CloseAccount
      */
     protected $_closeAccount;
 
     /**
-     * @var \Adyen\Service\ResourceModel\Markerplace\CloseAccountHolder
+     * @var \Adyen\Service\ResourceModel\Marketplace\CloseAccountHolder
      */
     protected $_closeAccountHolder;
 
     /**
-     * @var \Adyen\Service\ResourceModel\Markerplace\SuspendAccountHolder
+     * @var \Adyen\Service\ResourceModel\Marketplace\SuspendAccountHolder
      */
     protected $_suspendAccountHolder;
     
     /**
-     * @var \Adyen\Service\ResourceModel\Markerplace\UnSuspendAccountHolder
+     * @var \Adyen\Service\ResourceModel\Marketplace\UnSuspendAccountHolder
      */
     protected $_unSuspendAccountHolder;
 
     /**
-     * @var \Adyen\Service\ResourceModel\Markerplace\UploadDocument
+     * @var \Adyen\Service\ResourceModel\Marketplace\UploadDocument
      */
     protected $_uploadDocument;
 
@@ -49,7 +49,7 @@ class Marketplace extends \Adyen\Service
     protected $_updateAccountHolder;
 
     /**
-     * @var \Adyen\Service\ResourceModel\Markerplace\DeleteBankAccounts
+     * @var \Adyen\Service\ResourceModel\Marketplace\DeleteBankAccounts
      */
     protected $_deleteBankAccounts;
 
@@ -66,13 +66,13 @@ class Marketplace extends \Adyen\Service
 
         $this->_createAccountHolder = new \Adyen\Service\ResourceModel\Marketplace\CreateAccountHolder($this);
         $this->_updateAccountHolder = new \Adyen\Service\ResourceModel\Marketplace\UpdateAccountHolder($this);
-        $this->_getAccountHolder = new \Adyen\Service\ResourceModel\Markerplace\GetAccountHolder($this);
-        $this->_closeAccount = new \Adyen\Service\ResourceModel\Markerplace\CloseAccount($this);
-        $this->_closeAccountHolder = new \Adyen\Service\ResourceModel\Markerplace\CloseAccountHolder($this);
-        $this->_suspendAccountHolder = new \Adyen\Service\ResourceModel\Markerplace\SuspendAccountHolder($this);
-        $this->_unSuspendAccountHolder = new \Adyen\Service\ResourceModel\Markerplace\UnSuspendAccountHolder($this);
-        $this->_uploadDocument = new \Adyen\Service\ResourceModel\Markerplace\UploadDocument($this);
-        $this->_deleteBankAccounts = new \Adyen\Service\ResourceModel\Markerplace\DeleteBankAccounts($this);
+        $this->_getAccountHolder = new \Adyen\Service\ResourceModel\Marketplace\GetAccountHolder($this);
+        $this->_closeAccount = new \Adyen\Service\ResourceModel\Marketplace\CloseAccount($this);
+        $this->_closeAccountHolder = new \Adyen\Service\ResourceModel\Marketplace\CloseAccountHolder($this);
+        $this->_suspendAccountHolder = new \Adyen\Service\ResourceModel\Marketplace\SuspendAccountHolder($this);
+        $this->_unSuspendAccountHolder = new \Adyen\Service\ResourceModel\Marketplace\UnSuspendAccountHolder($this);
+        $this->_uploadDocument = new \Adyen\Service\ResourceModel\Marketplace\UploadDocument($this);
+        $this->_deleteBankAccounts = new \Adyen\Service\ResourceModel\Marketplace\DeleteBankAccounts($this);
 
     }
 

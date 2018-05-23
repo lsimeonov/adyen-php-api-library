@@ -1,15 +1,14 @@
 <?php
 
 
-namespace Adyen\Service\ResourceModel\Markerplace;
+namespace Adyen\Service\ResourceModel\Marketplace;
 
 
-class UploadDocument extends \Adyen\Service\AbstractResource
+class CloseAccountHolder extends \Adyen\Service\AbstractResource
 {
+
     protected $_requiredFields = [
-        'documentContent',
-        'documentDetail.accountHolderCode',
-        'documentDetail.documentType'
+        'accountHolderCode',
     ];
 
     /**
@@ -23,8 +22,7 @@ class UploadDocument extends \Adyen\Service\AbstractResource
         $this->_endpoint = $service->getClient()
                                    ->getConfig()
                                    ->get('marketplaceEndpoint') . '/cal/services/Account/' . $service->getClient()
-                                                                                                     ->getApiMarketplaceVersion() . '/uploadDocument';
+                                                                                                     ->getApiMarketplaceVersion() . '/closeAccountHolder';
     }
-
 
 }

@@ -1,15 +1,15 @@
 <?php
 
-namespace Adyen\Service\ResourceModel\Markerplace;
+namespace Adyen\Service\ResourceModel\Marketplace;
 
-class UnSuspendAccountHolder extends \Adyen\Service\AbstractResource
+class SuspendAccountHolder extends \Adyen\Service\AbstractResource
 {
     protected $_requiredFields = [
         'accountHolderCode',
     ];
 
     /**
-     * UnSuspendAccountHolder constructor.
+     * SuspendAccountHolder constructor.
      *
      * @param \Adyen\Service $service
      */
@@ -19,6 +19,6 @@ class UnSuspendAccountHolder extends \Adyen\Service\AbstractResource
         $this->_endpoint = $service->getClient()
           ->getConfig()
           ->get('marketplaceEndpoint').'/cal/services/Account/'.$service->getClient()
-          ->getApiMarketplaceVersion().'/unSuspendAccountHolder';
+          ->getApiMarketplaceVersion().'/suspendAccountHolder';
     }
 }

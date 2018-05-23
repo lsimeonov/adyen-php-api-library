@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Adyen\Service\ResourceModel\Markerplace;
+namespace Adyen\Service\ResourceModel\Marketplace;
 
 /**
  * Class GetAccountHolder.
