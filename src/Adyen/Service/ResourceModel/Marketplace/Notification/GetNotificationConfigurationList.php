@@ -20,4 +20,15 @@ class GetNotificationConfigurationList extends \Adyen\Service\AbstractResource
                                    ->get('marketplaceEndpoint').'/cal/services/Notification/'.$service->getClient()
                                                                                                       ->getApiNotificationVersion().'/getNotificationConfigurationList';
     }
+
+    /**
+     * @param $params
+     *
+     * @return mixed
+     */
+    public function request($params)
+    {
+        $curlClient = $this->_service->getClient()->getHttpClient();
+        return $curlClient->requestJson($this->_service, $this->_endpoint, $params);
+    }
 }

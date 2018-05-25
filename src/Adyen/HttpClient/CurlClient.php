@@ -11,6 +11,7 @@ class CurlClient implements ClientInterface
      * @param \Adyen\Service $service
      * @param $requestUrl
      * @param $params
+     *
      * @return mixed
      * @throws \Adyen\AdyenException
      */
@@ -21,7 +22,9 @@ class CurlClient implements ClientInterface
         $logger = $client->getLogger();
         $username = $config->getUsername();
         $password = $config->getPassword();
-        $jsonRequest = json_encode($params);
+
+        // Make sure to convert to empty object if the array is empty
+        $jsonRequest = empty($params) ? '{}' : json_encode($params);
 
         // log the request
         $this->logRequest($logger, $requestUrl, $params);
@@ -34,19 +37,19 @@ class CurlClient implements ClientInterface
 
         // set authorisation
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
+        curl_setopt($ch, CURLOPT_USERPWD, $username.":".$password);
 
         //Attach our encoded JSON string to the POST fields.
         curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonRequest);
 
         // set a custom User-Agent
-        $userAgent = $config->get('applicationName') . " " . \Adyen\Client::USER_AGENT_SUFFIX . $client->getLibraryVersion();
+        $userAgent = $config->get('applicationName')." ".\Adyen\Client::USER_AGENT_SUFFIX.$client->getLibraryVersion();
 
         //Set the content type to application/json and use the defined userAgent
-        $headers = array(
+        $headers = [
             'Content-Type: application/json',
-            'User-Agent: ' . $userAgent
-        );
+            'User-Agent: '.$userAgent,
+        ];
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -58,7 +61,7 @@ class CurlClient implements ClientInterface
         $httpStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         // log the raw response
-        $logger->info("JSON Response is: " . $result);
+        $logger->info("JSON Response is: ".$result);
 
         // result not 200 throw error
         if ($httpStatus != 200 && $result) {
@@ -80,7 +83,7 @@ class CurlClient implements ClientInterface
             $result = json_decode($result, true);
 
             // log the array result
-            $logger->info('Params in response from Adyen:' . print_r($result, 1));
+            $logger->info('Params in response from Adyen:'.print_r($result, 1));
         }
 
         return $result;
@@ -93,6 +96,7 @@ class CurlClient implements ClientInterface
      * @param \Adyen\Service $service
      * @param $requestUrl
      * @param $params
+     *
      * @return mixed
      * @throws \Adyen\AdyenException
      */
@@ -105,8 +109,8 @@ class CurlClient implements ClientInterface
         $password = $config->getPassword();
 
         // log the requestUr, params and json request
-        $logger->info("Request url to Adyen: " . $requestUrl);
-        $logger->info('Params in request to Adyen:' . print_r($params, 1));
+        $logger->info("Request url to Adyen: ".$requestUrl);
+        $logger->info('Params in request to Adyen:'.print_r($params, 1));
 
         //Initiate cURL.
         $ch = curl_init($requestUrl);
@@ -116,18 +120,18 @@ class CurlClient implements ClientInterface
 
         // set authorisation
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
+        curl_setopt($ch, CURLOPT_USERPWD, $username.":".$password);
         curl_setopt($ch, CURLOPT_POST, count($params));
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
 
         // set a custom User-Agent
-        $userAgent = $config->get('applicationName') . " " . \Adyen\Client::USER_AGENT_SUFFIX . $client->getLibraryVersion();
+        $userAgent = $config->get('applicationName')." ".\Adyen\Client::USER_AGENT_SUFFIX.$client->getLibraryVersion();
 
         //Set the content type to application/json and use the defined userAgent
-        $headers = array(
+        $headers = [
             'Content-Type: application/x-www-form-urlencoded',
-            'User-Agent: ' . $userAgent
-        );
+            'User-Agent: '.$userAgent,
+        ];
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
@@ -139,7 +143,7 @@ class CurlClient implements ClientInterface
         $httpStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         // log the raw response
-        $logger->info("JSON Response is: " . $result);
+        $logger->info("JSON Response is: ".$result);
 
         if ($httpStatus != 200 && $result) {
             $this->handleResultError($result, $logger);
@@ -165,7 +169,7 @@ class CurlClient implements ClientInterface
             }
 
             // log the array result
-            $logger->info('Params in response from Adyen:' . print_r($result, 1));
+            $logger->info('Params in response from Adyen:'.print_r($result, 1));
         }
 
 
@@ -180,6 +184,7 @@ class CurlClient implements ClientInterface
      * @param $errno
      * @param $message
      * @param $logger
+     *
      * @throws \Adyen\ConnectionException
      */
     protected function handleCurlError($url, $errno, $message, $logger)
@@ -191,14 +196,14 @@ class CurlClient implements ClientInterface
             case CURLE_COULDNT_RESOLVE_HOST:
             case CURLE_OPERATION_TIMEOUTED:
                 $msg = "Could not connect to Adyen ($url).  Please check your "
-                    . "internet connection and try again.";
+                    ."internet connection and try again.";
                 break;
             case CURLE_SSL_CACERT:
             case CURLE_SSL_PEER_CERTIFICATE:
                 $msg = "Could not verify Adyen's SSL certificate.  Please make sure "
-                    . "that your network is not intercepting certificates.  "
-                    . "(Try going to $url in your browser.)  "
-                    . "If this problem persists,";
+                    ."that your network is not intercepting certificates.  "
+                    ."(Try going to $url in your browser.)  "
+                    ."If this problem persists,";
                 break;
             default:
                 $msg = "Unexpected error communicating with Adyen.";
@@ -213,17 +218,18 @@ class CurlClient implements ClientInterface
      *
      * @param $result
      * @param $logger
+     *
      * @throws \Adyen\AdyenException
      */
     protected function handleResultError($result, $logger)
     {
         $decodeResult = json_decode($result, true);
 
-        if(isset($decodeResult['message']) && isset($decodeResult['errorCode'])) {
-            if(!is_numeric($decodeResult) && strstr($decodeResult['errorCode'], '_') !== false){
+        if (isset($decodeResult['message']) && isset($decodeResult['errorCode'])) {
+            if (!is_numeric($decodeResult) && strstr($decodeResult['errorCode'], '_') !== false) {
                 $decodeResult['errorCode'] = str_replace('_', '', $decodeResult['errorCode']);
             }
-            $logger->error($decodeResult['errorCode'] . ': ' . $decodeResult['message']);
+            $logger->error($decodeResult['errorCode'].': '.$decodeResult['message']);
             throw new \Adyen\AdyenException($decodeResult['message'], $decodeResult['errorCode'], null,
                 $decodeResult['status'], $decodeResult['errorType']);
         }
@@ -241,7 +247,7 @@ class CurlClient implements ClientInterface
     private function logRequest(\Psr\Log\LoggerInterface $logger, $requestUrl, $params)
     {
         // log the requestUr, params and json request
-        $logger->info("Request url to Adyen: " . $requestUrl);
+        $logger->info("Request url to Adyen: ".$requestUrl);
         if (isset($params["additionalData"]) && isset($params["additionalData"]["card.encrypted.json"])) {
             $params["additionalData"]["card.encrypted.json"] = "*";
         }
@@ -249,6 +255,6 @@ class CurlClient implements ClientInterface
             $params["card"]["number"] = "*";
             $params["card"]["cvc"] = "*";
         }
-        $logger->info('JSON Request to Adyen:' . json_encode($params));
+        $logger->info('JSON Request to Adyen:'.json_encode($params));
     }
 }
