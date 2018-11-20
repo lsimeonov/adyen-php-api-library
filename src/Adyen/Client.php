@@ -20,6 +20,7 @@ class Client
     const API_RECURRING_VERSION = "v25";
     const API_MARKETPLACE_VERSION = "v4";
     const API_NOTIFICATION_VERSION = "v1";
+    const API_MARKETPLACE_FUND_VERSION = "v3";
 
     /**
      * @var Adyen_Config $config
@@ -182,6 +183,10 @@ class Client
     public function getApiMarketplaceVersion()
     {
         return self::API_MARKETPLACE_VERSION;
+    }
+
+    public function getApiMarketplaceFundVersion(){
+        return self::API_MARKETPLACE_FUND_VERSION;
     }
 
     /**
